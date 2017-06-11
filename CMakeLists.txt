@@ -44,6 +44,7 @@ if(UNICODECPP_BUILD_UNIT_TESTS)
     "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/googletest/googletest/include")
 
   add_executable(unicodecpp_unit_tests
+    tests/unicodecpp/utf8_to_utf32_iterator_tests.cpp
     tests/unicodecpp/v8_0_0/grapheme_segmentation_tests.cpp)
   target_include_directories(unicodecpp_unit_tests
     PRIVATE ${GTEST_INCLUDE_DIRS})
