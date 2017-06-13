@@ -8,6 +8,8 @@ project(unicodecpp)
 
 option(UNICODECPP_BUILD_UNIT_TESTS "Build unit tests." OFF)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 #==============================================================================#
 # Compiler settings                                                            #
 #==============================================================================#
