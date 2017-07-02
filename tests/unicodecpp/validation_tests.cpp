@@ -91,5 +91,24 @@ std::vector<std::string> invalidUtf8 = {
 INSTANTIATE_TEST_CASE_P(InvalidUtf8, IsValidUtf8Test,
                         Combine(ValuesIn({ false }), ValuesIn(invalidUtf8)));
 
+TEST(IsUtf8StartByteTest, ReturnsTrueForStartBytes)
+{
+  using ::unicodecpp::isUtf8StartByte;
+  EXPECT_TRUE(isUtf8StartByte(0b01111111));
+  EXPECT_TRUE(isUtf8StartByte(0b11011111));
+  EXPECT_TRUE(isUtf8StartByte(0b11101111));
+  EXPECT_TRUE(isUtf8StartByte(0b11110111));
+}
+
+TEST(IsUtf8StartByteTest, ReturnsFalseForNonStartBytes)
+{
+  using ::unicodecpp::isUtf8StartByte;
+  EXPECT_FALSE(isUtf8StartByte(0b10000000));
+  EXPECT_FALSE(isUtf8StartByte(0b11111011));
+  EXPECT_FALSE(isUtf8StartByte(0b11111101));
+  EXPECT_FALSE(isUtf8StartByte(0b11111110));
+  EXPECT_FALSE(isUtf8StartByte(0b11111111));
+}
+
 } // unnamed namespace
 

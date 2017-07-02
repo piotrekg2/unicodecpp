@@ -7,6 +7,17 @@
 namespace unicodecpp {
 
 ///
+/// Returns whether the given byte is a start byte of a valid UTF-8 sequence.
+///
+/// A valid start byte matches one of the following patterns:
+///   0xxxxxxx
+///   110xxxxx
+///   1110xxxx
+///   11110xxx
+///
+inline bool isUtf8StartByte(uint8_t byte);
+
+///
 /// Returns whether the given text is valid UTF-8. This function is specially
 /// optimized for texts containing mostly ASCII characters. Optimization is
 /// available only if InputIter = uint8_t*.
@@ -15,6 +26,12 @@ template <typename InputIter>
 inline bool isValidUtf8(InputIter begin, InputIter end);
 
 // Implementation
+
+inline bool
+isUtf8StartByte(uint8_t byte)
+{
+  return ::unicodecpp::details::parseUtf8CharLength(byte) != -1;
+}
 
 template <typename InputIter>
 inline bool
